@@ -16,6 +16,6 @@ public class ContactDetails {
 	@Override
 	public String toString() {
 		return "Address_Book [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
-				+ city + ", state=" + state + ", email=" + email + ", zip=" + zip + ", phone=" + phone + "]";
+				+ city + ", state=" + state + ", email=" + email + ", zip=" + zip + ", phone=" + phone + "]\n";
 	}
 }
