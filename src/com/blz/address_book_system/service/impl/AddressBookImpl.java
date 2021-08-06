@@ -59,34 +59,47 @@ public class AddressBookImpl implements IAddressBook{
           System.out.println(contactList.get(i) + " ");
 	}
 	@Override
-	public void editContact(ContactDetails user,int count) {
+	public void editContact() {
 		// TODO Auto-generated method stub
-		System.out.println(user.toString());
-//		System.out.println(contactList.get(count));
-		System.out.println("Please Enter the Same Detail or Change IT");
-		System.out.println("First Name is '"+user.getFirstName()+"' Edit");
-		firstName=SC.nextLine();
-		System.out.println("Second Name is '"+user.getLastName()+"' Edit");
-		lastName=SC.nextLine();
-		System.out.println("Address is '"+user.getAddress()+"' Edit");
-		address=SC.nextLine();
-		System.out.println("City Name is '"+user.getCity()+"' Edit");
-		city=SC.nextLine();
-		System.out.println("State Name is '"+user.getState()+"' Edit");
-		state=SC.nextLine();
-		System.out.println("Email is '"+user.getEmail()+"' Edit");
-		email=SC.nextLine();
-		System.out.println("Zip Code is '"+user.getZip()+"' Edit");
-		zip=SC.nextLine();
-		System.out.println("Phone Number is '"+user.getPhone()+"' Edit");
-		phone=SC.nextLine();
-		contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
-//		System.out.println(contactDetails);
-		contactList.set(count,contactDetails);
-		System.out.println("*** *** LIST OF DETAILS *** ***");
-		for (int i = 0; i < contactList.size(); i++) {
-			System.out.println(contactList.get(i) + " ");
-		} 
+		System.out.println("Enter the Username");
+		String searchName=SC.nextLine();
+		ContactDetails user = null;
+		int count=0;
+		for (ContactDetails i :contactList ) {
+			count++;
+			if(i.getFirstName()!=null && i.getFirstName().contains(searchName)) {
+				//System.out.println(i.getFirstName() + " ");
+				user=i;
+				count=count-1;
+				System.out.println(user.toString());
+//				System.out.println(contactList.get(count));
+				System.out.println("Please Enter the Same Detail or Change It");
+				System.out.println("First Name is '"+user.getFirstName()+"' Edit");
+				firstName=SC.nextLine();
+				System.out.println("Second Name is '"+user.getLastName()+"' Edit");
+				lastName=SC.nextLine();
+				System.out.println("Address is '"+user.getAddress()+"' Edit");
+				address=SC.nextLine();
+				System.out.println("City Name is '"+user.getCity()+"' Edit");
+				city=SC.nextLine();
+				System.out.println("State Name is '"+user.getState()+"' Edit");
+				state=SC.nextLine();
+				System.out.println("Email is '"+user.getEmail()+"' Edit");
+				email=SC.nextLine();
+				System.out.println("Zip Code is '"+user.getZip()+"' Edit");
+				zip=SC.nextLine();
+				System.out.println("Phone Number is '"+user.getPhone()+"' Edit");
+				phone=SC.nextLine();
+				contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
+//				System.out.println(contactDetails);
+				contactList.set(count,contactDetails);
+				System.out.println("*** *** LIST OF DETAILS *** ***");
+				for (int j = 0; j < contactList.size(); j++) {
+					System.out.println(contactList.get(j) + " ");
+				} 
+				break;
+			}
+		}
 	}
 //	@Override
 //	public void deleteContact() {

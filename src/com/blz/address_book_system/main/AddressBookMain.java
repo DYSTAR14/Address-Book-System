@@ -27,16 +27,7 @@ public class AddressBookMain {
 				addressBook.addContact();
 				break;
 			case 2:
-				System.out.println("Enter the Username");
-				String searchName=SC.nextLine();
-				int count=0;
-				for (ContactDetails i :AddressBookImpl.contactList ) {
-					count++;
-					if(i.getFirstName()!=null && i.getFirstName().contains(searchName)) {
-						//System.out.println(i.getFirstName() + " ");
-						addressBook.editContact(i,count-1);
-					}
-				}
+				addressBook.editContact();
 				break;
 //			case 3:
 //				addressBook.deleteContact();
