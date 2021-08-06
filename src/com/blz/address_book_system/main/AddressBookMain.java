@@ -1,8 +1,6 @@
 package com.blz.address_book_system.main;
 
 import java.util.Scanner;
-
-import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
 import com.blz.address_book_system.service.impl.AddressBookImpl;
 
@@ -29,9 +27,9 @@ public class AddressBookMain {
 			case 2:
 				addressBook.editContact();
 				break;
-//			case 3:
-//				addressBook.deleteContact();
-//				break;
+			case 3:
+				addressBook.deleteContact();
+				break;
 			default:
 				System.out.println("Select from Option");
 				break;

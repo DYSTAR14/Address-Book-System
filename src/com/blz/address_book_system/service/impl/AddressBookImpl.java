@@ -63,13 +63,11 @@ public class AddressBookImpl implements IAddressBook{
 		// TODO Auto-generated method stub
 		System.out.println("Enter the Username");
 		String searchName=SC.nextLine();
-		ContactDetails user = null;
 		int count=0;
-		for (ContactDetails i :contactList ) {
+		for (ContactDetails user :contactList ) {
 			count++;
-			if(i.getFirstName()!=null && i.getFirstName().contains(searchName)) {
+			if(user.getFirstName()!=null && user.getFirstName().contains(searchName)) {
 				//System.out.println(i.getFirstName() + " ");
-				user=i;
 				count=count-1;
 				System.out.println(user.toString());
 //				System.out.println(contactList.get(count));
@@ -101,9 +99,28 @@ public class AddressBookImpl implements IAddressBook{
 			}
 		}
 	}
-//	@Override
-//	public void deleteContact() {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	@Override
+	public void deleteContact() {
+		// TODO Auto-generated method stub
+		System.out.println("List Of Person Name");
+		for (ContactDetails i :contactList ) {
+	          System.out.println(i.getFirstName() + " ");
+		}
+		System.out.println();
+		System.out.println("Enter the Username");
+		String searchName=SC.nextLine();
+		int count=0;
+		for (ContactDetails user :contactList ) {
+			count++;
+			if(user.getFirstName()!=null && user.getFirstName().contains(searchName)) {
+				count=count-1;
+				contactList.remove(count);
+				break;
+			}
+		}
+		System.out.println("*** *** LIST OF DETAILS *** ***");
+		for (int j = 0; j < contactList.size(); j++) {
+			System.out.println(contactList.get(j) + " ");
+		} 
+	}
 }
