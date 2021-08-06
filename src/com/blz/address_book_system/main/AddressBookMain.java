@@ -1,6 +1,8 @@
 package com.blz.address_book_system.main;
 
 import java.util.Scanner;
+
+import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
 import com.blz.address_book_system.service.impl.AddressBookImpl;
 
@@ -11,21 +13,31 @@ public class AddressBookMain {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
 		IAddressBook addressBook=(IAddressBook) new AddressBookImpl();
+		System.out.println("Hi This is Address Book Library");
 		int exit=1;
 		while(exit!=0) {
-			System.out.println("Hi This is Address Book Library");
 			System.out.println("1.Add Contacts\n2.Edit Contact\n3.Delete Contact\n0.Exit\nSelect from Option");
 			int op=sc.nextInt();
 			switch(op) {
 			case 0:
 				exit=0;
+				System.out.println("Thank You For Participation");
 				break;
 			case 1:
 				addressBook.addContact();
 				break;
-//			case 2:
-//				addressBook.editContact();
-//				break;
+			case 2:
+				System.out.println("Enter the Username");
+				String searchName=SC.nextLine();
+				int count=0;
+				for (ContactDetails i :AddressBookImpl.contactList ) {
+					count++;
+					if(i.getFirstName()!=null && i.getFirstName().contains(searchName)) {
+						//System.out.println(i.getFirstName() + " ");
+						addressBook.editContact(i,count-1);
+					}
+				}
+				break;
 //			case 3:
 //				addressBook.deleteContact();
 //				break;
