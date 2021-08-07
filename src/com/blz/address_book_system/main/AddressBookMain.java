@@ -5,30 +5,24 @@ import com.blz.address_book_system.service.IAddressBook;
 import com.blz.address_book_system.service.impl.AddressBookImpl;
 
 public class AddressBookMain {
-	static final Scanner SC=new Scanner(System.in);
-	
+	static final Scanner SC = new Scanner(System.in);
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner sc=new Scanner(System.in);
-		IAddressBook addressBook=(IAddressBook) new AddressBookImpl();
-		int exit=1;
-		while(exit!=0) {
+		Scanner sc = new Scanner(System.in);
+		IAddressBook addressBook = (IAddressBook) new AddressBookImpl();
+		int exit = 1;
+		while (exit != 0) {
 			System.out.println("Hi This is Address Book Library");
 			System.out.println("1.Add Contacts\n2.Edit Contact\n3.Delete Contact\n0.Exit\nSelect from Option");
-			int op=sc.nextInt();
-			switch(op) {
+			int op = sc.nextInt();
+			switch (op) {
 			case 0:
-				exit=0;
+				exit = 0;
 				break;
 			case 1:
 				addressBook.addContact();
 				break;
-//			case 2:
-//				addressBook.editContact();
-//				break;
-//			case 3:
-//				addressBook.deleteContact();
-//				break;
 			default:
 				System.out.println("Select from Option");
 				break;
