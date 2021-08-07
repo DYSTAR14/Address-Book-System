@@ -1,17 +1,44 @@
 package com.blz.address_book_system.dto;
 
 public class ContactDetails {
-	private final String firstName,lastName,address,city,state,email,zip,phone;
-	public ContactDetails(String firstName, String lastName, String address, String city, String state, String email,
-			String zip, String phone) {
-				this.firstName = firstName;
-				this.lastName = lastName;
-				this.address = address;
-				this.city = city;
-				this.state = state;
-				this.email = email;
-				this.zip = zip;
-				this.phone = phone;
+	private String addressBookName;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private String city;
+	private String state;
+	private String email;
+	private String zip;
+	private String phone;
+	public void setAddressBookName(String addressBookName) {
+		this.addressBookName=addressBookName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getAddressBookName() {
+		return addressBookName;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -39,7 +66,8 @@ public class ContactDetails {
 	}
 	@Override
 	public String toString() {
-		return "Address_Book [firstName=" + firstName + ", lastName=" + lastName + ",\n address=" + address + 
+		return " [firstName=" + firstName + ", lastName=" + lastName + ",\n address=" + address + 
 				", city="+ city + ", state=" + state + ",\n email=" + email + ", zip=" + zip + ", phone=" + phone + "]\n";
 	}
+
 }

@@ -1,114 +1,193 @@
 package com.blz.address_book_system.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
 
-public class AddressBookImpl implements IAddressBook{
-	static String firstName,lastName,address,city,state,email,zip,phone;
-	static public List<ContactDetails> contactList=new ArrayList<ContactDetails>();
+public class AddressBookImpl implements IAddressBook {
+	private List<ContactDetails> contactList;
+	private HashMap<String, List<ContactDetails>> contactListToMap = new HashMap<String, List<ContactDetails>>();
+	private String addressBookName, firstName, lastName, address, city, state, email, zip, phone;
 	ContactDetails contactDetails;
-	static final Scanner SC=new Scanner(System.in);
+	static final Scanner SC = new Scanner(System.in);
+
+	public void newDataEntry(String addressBookName, String firstName, String lastName, String address, String city,
+			String state, String email, String zip, String phone) {
+		contactDetails = new ContactDetails();
+		contactDetails.setAddressBookName(addressBookName);
+		contactDetails.setFirstName(firstName);
+		contactDetails.setLastName(lastName);
+		contactDetails.setAddress(address);
+		contactDetails.setCity(city);
+		contactDetails.setState(state);
+		contactDetails.setEmail(email);
+		contactDetails.setZip(zip);
+		contactDetails.setPhone(phone);
+		contactList = new ArrayList<ContactDetails>();
+		contactList.add(contactDetails);
+		contactListToMap.put(addressBookName, contactList);
+		System.out.println("*** *** LIST OF DETAILS *** ***");
+		System.out.println("HashMap\n" + contactListToMap);
+	}
+
+	public void exitDataEntry(String addressBookName, String firstName, String lastName, String address, String city,
+			String state, String email, String zip, String phone) {
+		contactDetails = new ContactDetails();
+		contactDetails.setFirstName(firstName);
+		contactDetails.setLastName(lastName);
+		contactDetails.setAddress(address);
+		contactDetails.setCity(city);
+		contactDetails.setState(state);
+		contactDetails.setEmail(email);
+		contactDetails.setZip(zip);
+		contactDetails.setPhone(phone);
+		contactList = new ArrayList<ContactDetails>();
+		contactList = contactListToMap.get(addressBookName);
+		contactList.add(contactDetails);
+		contactListToMap.put(addressBookName, contactList);
+		System.out.println("*** *** LIST OF DETAILS *** ***");
+		System.out.println("HashMap\n" + contactListToMap);
+	}
+
 	@Override
 	public void addContact() {
-		// TODO Auto-generated method stub
-//		System.out.println("Enter First Name");
-//		firstName=SC.nextLine();
-//		System.out.println("Enter Second Name");
-//		lastName=SC.nextLine();
-//		System.out.println("Enter Address");
-//		address=SC.nextLine();
-//		System.out.println("Enter City Name");
-//		city=SC.nextLine();
-//		System.out.println("Enter State Name");
-//		state=SC.nextLine();
-//		System.out.println("Enter Email");
-//		email=SC.nextLine();
-//		System.out.println("Enter Zip Code");
-//		zip=SC.nextLine();
-//		System.out.println("Enter Phone Number");
-//		phone=SC.nextLine();
-		firstName="Deepak";lastName="Yadav";address="Empress Thane";city="Thane";state="Maharashtra";
-		email="ydeepak@gmail.com";zip = "400005";phone="9823563242";
-		contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
-//		System.out.println(contactDetails);
-		contactList.add(contactDetails);
+		char option = 'n';
+		System.out.println("You Want to Add in Existing Address Book (y/n)");
+		option = SC.next().charAt(0);
+		if (option == 'Y' || option == 'y') {
+			if (contactListToMap.isEmpty()) {
+				System.out.println("DIC is Empty");
+			} else {
 
-		firstName="Sarang";lastName="Potpite";address="Pune nagar";city="Pune";state="Maharashtra";
-		email="sarang@gmail.com";zip = "564305";phone="9823326657";
-		contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
-//		System.out.println(contactDetails);
-		contactList.add(contactDetails);
-		
-		firstName="Gaurav";lastName="Yadav";address="Empress Thane";city="Thane";state="Maharashtra";
-		email="Gaurav@gmail.com";zip = "400005";phone="9823565436";
-		contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
-//		System.out.println(contactDetails);
-		contactList.add(contactDetails);
-		
-		firstName="Ronak";lastName="Jain";address="Gokul Nagar";city="Thane";state="Maharashtra";
-		email="Ronak@gmail.com";zip = "400005";phone="9825674567";
-		contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
-//		System.out.println(contactDetails);
-		contactList.add(contactDetails);
-		System.out.println("*** *** LIST OF DETAILS *** ***");
-		for (int i = 0; i < contactList.size(); i++)
-          System.out.println(contactList.get(i) + " ");
+				System.out.println("List Address Book Name");
+				System.out.println("Key Value");
+				for (HashMap.Entry m : contactListToMap.entrySet()) {
+					System.out.println(m.getKey());
+				}
+				System.out.println();
+				System.out.println("Enter Address Book Name");
+				addressBookName = SC.next();
+				System.out.println("Enter First Name");
+				firstName=SC.next();
+				System.out.println("Enter Second Name");
+				lastName=SC.next();
+				System.out.println("Enter Address");
+				address=SC.next();
+				System.out.println("Enter City Name");
+				city=SC.next();
+				System.out.println("Enter State Name");
+				state=SC.next();
+				System.out.println("Enter Email");
+				email=SC.next();
+				System.out.println("Enter Zip Code");
+				zip=SC.next();
+				System.out.println("Enter Phone Number");
+				phone=SC.next();
+				System.out.println(contactListToMap.get(addressBookName));
+				exitDataEntry(addressBookName, firstName, lastName, address, city, state, email, zip, phone);
+			}
+		} else {
+			System.out.println("Enter Address Book Name");
+			addressBookName=SC.next();
+			System.out.println("Enter First Name");
+			firstName=SC.next();
+			System.out.println("Enter Second Name");
+			lastName=SC.next();
+			System.out.println("Enter Address");
+			address=SC.next();
+			System.out.println("Enter City Name");
+			city=SC.next();
+			System.out.println("Enter State Name");
+			state=SC.next();
+			System.out.println("Enter Email");
+			email=SC.next();
+			System.out.println("Enter Zip Code");
+			zip=SC.next();
+			System.out.println("Enter Phone Number");
+			phone=SC.next();
+			newDataEntry(addressBookName, firstName, lastName, address, city, state, email, zip, phone);
+		}
 	}
+
 	@Override
 	public void editContact() {
-		// TODO Auto-generated method stub
+		System.out.println("List Address Book Name");
+		System.out.println("Key Value");
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			System.out.println(m.getKey());
+		}
+		System.out.println();
+		System.out.println("Enter Address Book Name");
+		addressBookName = SC.next();
+		contactList = new ArrayList<ContactDetails>();
+		contactList = contactListToMap.get(addressBookName);
+		System.out.println(contactList);
 		System.out.println("Enter the Username");
-		String searchName=SC.nextLine();
-		int count=0;
-		for (ContactDetails user :contactList ) {
+		String searchName = SC.next();
+		int count = 0;
+		for (ContactDetails user : contactList) {
 			count++;
-			if(user.getFirstName()!=null && user.getFirstName().contains(searchName)) {
-				//System.out.println(i.getFirstName() + " ");
-				count=count-1;
+			if (user.getFirstName() != null && user.getFirstName().contains(searchName)) {
+				count = count - 1;
 				System.out.println(user.toString());
-//				System.out.println(contactList.get(count));
 				System.out.println("Please Enter the Same Detail or Change It");
-				System.out.println("First Name is '"+user.getFirstName()+"' Edit");
-				firstName=SC.nextLine();
-				System.out.println("Second Name is '"+user.getLastName()+"' Edit");
-				lastName=SC.nextLine();
-				System.out.println("Address is '"+user.getAddress()+"' Edit");
-				address=SC.nextLine();
-				System.out.println("City Name is '"+user.getCity()+"' Edit");
-				city=SC.nextLine();
-				System.out.println("State Name is '"+user.getState()+"' Edit");
-				state=SC.nextLine();
-				System.out.println("Email is '"+user.getEmail()+"' Edit");
-				email=SC.nextLine();
-				System.out.println("Zip Code is '"+user.getZip()+"' Edit");
-				zip=SC.nextLine();
-				System.out.println("Phone Number is '"+user.getPhone()+"' Edit");
-				phone=SC.nextLine();
-				contactDetails=new ContactDetails(firstName, lastName, address, city, state, email, zip, phone);
-//				System.out.println(contactDetails);
-				contactList.set(count,contactDetails);
+				System.out.println("First Name is '" + user.getFirstName() + "' Edit");
+				firstName = SC.next();
+				System.out.println("Second Name is '" + user.getLastName() + "' Edit");
+				lastName = SC.next();
+				System.out.println("Address is '" + user.getAddress() + "' Edit");
+				address = SC.next();
+				System.out.println("City Name is '" + user.getCity() + "' Edit");
+				city = SC.next();
+				System.out.println("State Name is '" + user.getState() + "' Edit");
+				state = SC.next();
+				System.out.println("Email is '" + user.getEmail() + "' Edit");
+				email = SC.next();
+				System.out.println("Zip Code is '" + user.getZip() + "' Edit");
+				zip = SC.next();
+				System.out.println("Phone Number is '" + user.getPhone() + "' Edit");
+				phone = SC.next();
+				contactDetails = new ContactDetails();
+				contactDetails.setAddressBookName(addressBookName);
+				contactDetails.setFirstName(firstName);
+				contactDetails.setLastName(lastName);
+				contactDetails.setAddress(address);
+				contactDetails.setCity(city);
+				contactDetails.setState(state);
+				contactDetails.setEmail(email);
+				contactDetails.setZip(zip);
+				contactDetails.setPhone(phone);
+				contactList.set(count, contactDetails);
 				System.out.println("*** *** LIST OF DETAILS *** ***");
-				for (int j = 0; j < contactList.size(); j++) {
-					System.out.println(contactList.get(j) + " ");
-				} 
-				break;
+				contactListToMap.put(addressBookName, contactList);
+				System.out.println("HashMap\n" + contactListToMap);
 			}
 		}
 	}
 	@Override
 	public void deleteContact() {
-		// TODO Auto-generated method stub
+		System.out.println("List Address Book Name");
+		System.out.println("Key Value");
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			System.out.println(m.getKey());
+		}
+		System.out.println();
+		System.out.println("Enter Address Book Name");
+		addressBookName = SC.next();
+		contactList = new ArrayList<ContactDetails>();
+		contactList = contactListToMap.get(addressBookName);
 		System.out.println("List Of Person Name");
 		for (ContactDetails i :contactList ) {
 	          System.out.println(i.getFirstName() + " ");
 		}
 		System.out.println();
 		System.out.println("Enter the Username");
-		String searchName=SC.nextLine();
+		String searchName=SC.next();
 		int count=0;
 		for (ContactDetails user :contactList ) {
 			count++;
@@ -118,9 +197,8 @@ public class AddressBookImpl implements IAddressBook{
 				break;
 			}
 		}
+		contactListToMap.put(addressBookName, contactList);
 		System.out.println("*** *** LIST OF DETAILS *** ***");
-		for (int j = 0; j < contactList.size(); j++) {
-			System.out.println(contactList.get(j) + " ");
-		} 
+		System.out.println("HashMap\n" + contactListToMap);
 	}
 }
