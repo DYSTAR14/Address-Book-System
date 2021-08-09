@@ -8,5 +8,5 @@ import com.blz.address_book_system.dto.ContactDetails;
 public interface IAddressBook {
 	public void addContact();
 	public void editContact();
-
+	public void deleteContact();
 }

@@ -27,6 +27,9 @@ public class AddressBookMain {
 			case 2:
 				addressBook.editContact();
 				break;
+			case 3:
+				addressBook.deleteContact();
+				break;
 			default:
 				System.out.println("Select from Option");
 				break;
