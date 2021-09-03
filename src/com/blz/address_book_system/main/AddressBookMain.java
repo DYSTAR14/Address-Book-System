@@ -14,7 +14,7 @@ public class AddressBookMain {
 		System.out.println("Hi This is Address Book Library");
 		int exit=1;
 		while(exit!=0) {
-			System.out.println("1.Add Contacts\n2.Edit Contact\n3.Delete Contact\n0.Exit\nSelect from Option");
+			System.out.println("1.Add Contacts\n2.Edit Contact\n3.Delete Contact\n4.Display Contact\n0.Exit\nSelect from Option");
 			int op=sc.nextInt();
 			switch(op) {
 			case 0:
@@ -23,12 +23,16 @@ public class AddressBookMain {
 				break;
 			case 1:
 				addressBook.addContact();
+//				addressBook.defaultData();
 				break;
 			case 2:
 				addressBook.editContact();
 				break;
 			case 3:
 				addressBook.deleteContact();
+				break;
+			case 4:
+				addressBook.displayContact();
 				break;
 			default:
 				System.out.println("Select from Option");
