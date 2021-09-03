@@ -4,4 +4,6 @@ public interface IAddressBook {
 	public void addContact();
 	public void editContact();
 	public void deleteContact();
+	public void displayContact();
+	public void defaultData();
 }

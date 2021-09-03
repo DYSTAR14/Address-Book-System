@@ -1,5 +1,8 @@
 package com.blz.address_book_system.dto;
 
+import java.util.Objects;
+
+
 public class ContactDetails {
 	private String addressBookName;
 	private String firstName;
@@ -10,6 +13,25 @@ public class ContactDetails {
 	private String email;
 	private String zip;
 	private String phone;
+
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstName);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ContactDetails other = (ContactDetails) obj;
+		return Objects.equals(firstName, other.firstName);
+	}
+	
+	
 	public void setAddressBookName(String addressBookName) {
 		this.addressBookName=addressBookName;
 	}
@@ -74,8 +96,9 @@ public class ContactDetails {
 	}
 	@Override
 	public String toString() {
-		return " [firstName=" + firstName + ", lastName=" + lastName + ",\n address=" + address + 
-				", city="+ city + ", state=" + state + ",\n email=" + email + ", zip=" + zip + ", phone=" + phone + "]\n";
+		return "addressBookName=" + addressBookName + " : [firstName=" + firstName + ", lastName="
+				+ lastName + ", address=" + address + ", city=" + city + ", state=" + state + ", email=" + email
+				+ ", zip=" + zip + ", phone=" + phone + "]";
 	}
 
 }
