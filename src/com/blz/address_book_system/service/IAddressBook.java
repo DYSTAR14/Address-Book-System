@@ -5,5 +5,8 @@ public interface IAddressBook {
 	public void editContact();
 	public void deleteContact();
 	public void displayContact();
-	public void defaultData();
+	public void displayContactCityStatePerson();
+	public void displayPersonByCity();
+	public void displayPersonByState();
+	
 }

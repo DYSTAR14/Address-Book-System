@@ -1,22 +1,27 @@
 package com.blz.address_book_system.service.impl;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
 
 public class AddressBookImpl implements IAddressBook {
-	private Set<ContactDetails> contactList;
-	private Map<String, Set<ContactDetails>> contactListToMap = new HashMap<String, Set<ContactDetails>>();
+	public Set<ContactDetails> contactList;
+	public static Map<String, Set<ContactDetails>> contactListToMap = new HashMap<String, Set<ContactDetails>>();
 	ContactDetails contactDetails;
 	static final Scanner SC = new Scanner(System.in);
 
 	public ContactDetails userDataEntry(ContactDetails userContactDetails) {
-
 		System.out.println("Enter Address Book Name ");
 		userContactDetails.setAddressBookName(SC.next());
 		System.out.println("Enter First Name");
@@ -24,7 +29,7 @@ public class AddressBookImpl implements IAddressBook {
 		System.out.println("Enter Last Name");
 		userContactDetails.setLastName(SC.next());
 		System.out.println("Enter Address");
-		userContactDetails.setAddress(SC.next());
+		userContactDetails.setAddress(SC.nextLine());
 		System.out.println("Enter City Name");
 		userContactDetails.setCity(SC.next());
 		System.out.println("Enter State Name");
@@ -42,12 +47,12 @@ public class AddressBookImpl implements IAddressBook {
 		contactList = new HashSet<ContactDetails>();
 		if (contactListToMap.get(userContactDetails.getAddressBookName()) == null) {
 			System.out.println("This is New Address Book : " + userContactDetails.getAddressBookName());
-			contactList.add(contactDetails);
+			contactList.add(userContactDetails);
 		} else {
 			contactList = contactListToMap.get(userContactDetails.getAddressBookName());
 			System.out.println(
 					"You are Adding Contact in Exiting Address Book : " + userContactDetails.getAddressBookName());
-			contactList.add(contactDetails);
+			contactList.add(userContactDetails);
 		}
 		contactListToMap.put(userContactDetails.getAddressBookName(), contactList);
 	}
@@ -61,7 +66,6 @@ public class AddressBookImpl implements IAddressBook {
 			if (contactListToMap.isEmpty()) {
 				System.out.println("DIC is Empty");
 			} else {
-
 				System.out.println("List Address Book Name");
 				System.out.println("Key Value");
 				for (HashMap.Entry m : contactListToMap.entrySet()) {
@@ -78,7 +82,7 @@ public class AddressBookImpl implements IAddressBook {
 			DataEntry(contactDetails);
 		}
 	}
-	
+
 	public String printAddressBookName() {
 		System.out.println("List Address Book Name");
 		System.out.println("Key Value");
@@ -93,10 +97,12 @@ public class AddressBookImpl implements IAddressBook {
 
 	@Override
 	public void editContact() {
-		
 		String addressBookName = printAddressBookName();
 		contactList = contactListToMap.get(addressBookName);
 		System.out.println(contactList);
+		System.out.println("List Of Person Name");
+		contactList.stream().forEach(i -> System.out.println(i.getFirstName() + " "));
+		System.out.println();
 		System.out.println("Enter the Username");
 		String searchName = SC.next();
 		int count = 0;
@@ -112,7 +118,7 @@ public class AddressBookImpl implements IAddressBook {
 				System.out.println("Last Name is '" + contactDetails.getLastName() + "' Edit");
 				contactDetails.setLastName(SC.next());
 				System.out.println("Address is '" + contactDetails.getAddress() + "' Edit");
-				contactDetails.setAddress(SC.next());
+				contactDetails.setAddress(SC.nextLine());
 				System.out.println("City Name is '" + contactDetails.getCity() + "' Edit");
 				contactDetails.setCity(SC.next());
 				System.out.println("State Name is '" + contactDetails.getState() + "' Edit");
@@ -149,82 +155,103 @@ public class AddressBookImpl implements IAddressBook {
 		System.out.println("*** *** LIST OF DETAILS *** ***");
 		for (HashMap.Entry m : contactListToMap.entrySet()) {
 			System.out.println(m.getKey() + " : " + m.getValue());
+			System.out.println();
 		}
 	}
 
 	@Override
-	public void defaultData() {
-		contactDetails = new ContactDetails();
-		contactDetails.setAddressBookName("DYSTAR");
-		contactDetails.setFirstName("Deepak");
-		contactDetails.setLastName("Yadav");
-		contactDetails.setAddress("EmpressThane");
-		contactDetails.setCity("Thane");
-		contactDetails.setState("Maharashtra");
-		contactDetails.setEmail("ydeepak@gmail.com");
-		contactDetails.setZip("400005");
-		contactDetails.setPhone("9823563242");
-		contactList = new HashSet<ContactDetails>();
-		contactList.add(contactDetails);
-		contactListToMap.put(contactDetails.getAddressBookName(), contactList);
-
-		contactDetails = new ContactDetails();
-		contactDetails.setAddressBookName("DYSTAR");
-		contactDetails.setFirstName("Gaurav");
-		contactDetails.setLastName("Yadav");
-		contactDetails.setAddress("EmpressThane");
-		contactDetails.setCity("Thane");
-		contactDetails.setState("Maharashtra");
-		contactDetails.setEmail("Gaurav@gmail.com");
-		contactDetails.setZip("400005");
-		contactDetails.setPhone("9823438723");
-		contactList = new HashSet<ContactDetails>();
-		contactList = contactListToMap.get(contactDetails.getAddressBookName());
-		contactList.add(contactDetails);
-		contactListToMap.put(contactDetails.getAddressBookName(), contactList);
-
-		contactDetails = new ContactDetails();
-		contactDetails.setAddressBookName("Jungle");
-		contactDetails.setFirstName("Sarang");
-		contactDetails.setLastName("Potpite");
-		contactDetails.setAddress("Punenagar");
-		contactDetails.setCity("Pune");
-		contactDetails.setState("Maharashtra");
-		contactDetails.setEmail("ydeepak@gmail.com");
-		contactDetails.setZip("564305");
-		contactDetails.setPhone("9823326657");
-		contactList = new HashSet<ContactDetails>();
-		contactList.add(contactDetails);
-		contactListToMap.put(contactDetails.getAddressBookName(), contactList);
-
-		contactDetails = new ContactDetails();
-		contactDetails.setAddressBookName("Jungle");
-		contactDetails.setFirstName("Jash");
-		contactDetails.setLastName("Vora");
-		contactDetails.setAddress("GokulThane");
-		contactDetails.setCity("Thane");
-		contactDetails.setState("Maharashtra");
-		contactDetails.setEmail("jash@gmail.com");
-		contactDetails.setZip("400105");
-		contactDetails.setPhone("9823563452");
-		contactList = new HashSet<ContactDetails>();
-		contactList = contactListToMap.get(contactDetails.getAddressBookName());
-		contactList.add(contactDetails);
-		contactListToMap.put(contactDetails.getAddressBookName(), contactList);
-		
-		contactDetails = new ContactDetails();
-		contactDetails.setAddressBookName("Jungle");
-		contactDetails.setFirstName("Jash");
-		contactDetails.setLastName("Vora");
-		contactDetails.setAddress("GokulThane");
-		contactDetails.setCity("Thane");
-		contactDetails.setState("Maharashtra");
-		contactDetails.setEmail("jash@gmail.com");
-		contactDetails.setZip("400105");
-		contactDetails.setPhone("9823563452");
-		contactList = new HashSet<ContactDetails>();
-		contactList = contactListToMap.get(contactDetails.getAddressBookName());
-		contactList.add(contactDetails);
-		contactListToMap.put(contactDetails.getAddressBookName(), contactList);
+	public void displayContactCityStatePerson() {
+		Formatter fmt = new Formatter();  
+		fmt.format("%15s %15s %15s\n", "City", "State", "Person");  
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			contactList = contactListToMap.get(m.getKey());
+			for (ContactDetails contactDetails : contactList) {
+				fmt.format("%15s %15s %15s\n", contactDetails.getCity(), contactDetails.getState(), contactDetails.getFirstName());  
+			}
+		}
+		System.out.println(fmt);  
 	}
+
+	@Override
+	public void displayPersonByState() {
+		List<String> mylist = new ArrayList<>();
+		System.out.println("We Have list of State In DataBase");
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			contactList = contactListToMap.get(m.getKey());
+			for (ContactDetails contactDetails : contactList) {
+				if(!mylist.contains(contactDetails.getState())) {
+					mylist.add(contactDetails.getState()); 
+				}
+			}
+		}
+		Collections.sort(mylist);
+		System.out.println();
+		for (String state : mylist) {
+			System.out.println(state);
+		}
+		System.out.println("\nEnter the States From List");
+		String searchState = SC.next();
+		if(mylist.contains(searchState)) {
+			for (HashMap.Entry m : contactListToMap.entrySet()) {
+				contactList = contactListToMap.get(m.getKey());
+				for (ContactDetails contactDetails : contactList) {
+					if(contactDetails.getState().equals(searchState)) {
+						System.out.println(contactDetails.personDetails());
+					}
+				}
+			}
+		}
+		else {
+			System.out.println("Sorry This States not Valid");
+		}
+		
+	}
+	
+	@Override
+	public void displayPersonByCity() {
+		
+		List<String> mylist = new ArrayList<>();
+		System.out.println("We Have list of City In DataBase");
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			contactList = contactListToMap.get(m.getKey());
+			for (ContactDetails contactDetails : contactList) {
+				if(!mylist.contains(contactDetails.getCity())) {
+					mylist.add(contactDetails.getCity()); 
+				}
+			}
+		}
+		Collections.sort(mylist);
+		System.out.println();
+		for (String city : mylist) {
+			System.out.println(city);
+		}
+		System.out.println("\nEnter the City From List");
+		String searchCity = SC.next();
+		if(mylist.contains(searchCity)) {
+			for (HashMap.Entry m : contactListToMap.entrySet()) {
+				contactList = contactListToMap.get(m.getKey());
+				for (ContactDetails contactDetails : contactList) {
+					if(contactDetails.getCity().equals(searchCity)) {
+						System.out.println(contactDetails.personDetails());
+					}
+				}
+			}
+		}
+		else {
+			System.out.println("Sorry This city not Valid");
+		}
+		
+	}
+	
+//	@Override
+//	public void displayPersonByCity() {
+//		
+//		List<String> mylist = new ArrayList<>();
+//
+//		contactListToMap.entrySet()
+//		.forEach(contactList -> contactListToMap.get(contactList.getKey())
+//				.stream().map(data -> data.getCity())
+//				.forEach(System.out::println));
+//		
+//	}
 }

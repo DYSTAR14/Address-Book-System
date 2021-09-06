@@ -94,11 +94,17 @@ public class ContactDetails {
 	public String getPhone() {
 		return phone;
 	}
+	
 	@Override
 	public String toString() {
 		return "addressBookName=" + addressBookName + " : [firstName=" + firstName + ", lastName="
 				+ lastName + ", address=" + address + ", city=" + city + ", state=" + state + ", email=" + email
 				+ ", zip=" + zip + ", phone=" + phone + "]";
+	}
+	
+	public String personDetails() {
+		return "FirstName=" + firstName + ", LastName="+lastName + ", Address=" + address + ", City=" 
+				+ city + ", State=" + state + ", Email=" + email+ ", Zip=" + zip + ", Phone=" + phone;
 	}
 
 }
