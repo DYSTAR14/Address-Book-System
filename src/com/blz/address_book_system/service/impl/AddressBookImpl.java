@@ -1,16 +1,12 @@
 package com.blz.address_book_system.service.impl;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
@@ -153,10 +149,9 @@ public class AddressBookImpl implements IAddressBook {
 	@Override
 	public void displayContact() {
 		System.out.println("*** *** LIST OF DETAILS *** ***");
-		for (HashMap.Entry m : contactListToMap.entrySet()) {
-			System.out.println(m.getKey() + " : " + m.getValue());
-			System.out.println();
-		}
+		contactListToMap.entrySet()
+		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
+		
 	}
 
 	@Override
@@ -174,17 +169,11 @@ public class AddressBookImpl implements IAddressBook {
 
 	@Override
 	public void displayPersonByState() {
-		List<String> mylist = new ArrayList<>();
 		System.out.println("We Have list of State In DataBase");
-		for (HashMap.Entry m : contactListToMap.entrySet()) {
-			contactList = contactListToMap.get(m.getKey());
-			for (ContactDetails contactDetails : contactList) {
-				if(!mylist.contains(contactDetails.getState())) {
-					mylist.add(contactDetails.getState()); 
-				}
-			}
-		}
-		Collections.sort(mylist);
+		Set<String> mylist = contactListToMap.entrySet()
+		        .stream().flatMap(data->data.getValue().stream().map(ContactDetails::getState))
+		        .collect(Collectors.toSet());
+		
 		System.out.println();
 		for (String state : mylist) {
 			System.out.println(state);
@@ -192,14 +181,10 @@ public class AddressBookImpl implements IAddressBook {
 		System.out.println("\nEnter the States From List");
 		String searchState = SC.next();
 		if(mylist.contains(searchState)) {
-			for (HashMap.Entry m : contactListToMap.entrySet()) {
-				contactList = contactListToMap.get(m.getKey());
-				for (ContactDetails contactDetails : contactList) {
-					if(contactDetails.getState().equals(searchState)) {
-						System.out.println(contactDetails.personDetails());
-					}
-				}
-			}
+			contactListToMap.entrySet()
+	        .stream().flatMap(data->data.getValue().stream())
+	        .filter(i -> i.getState().equals(searchState))
+	        .forEach(System.out::println);
 		}
 		else {
 			System.out.println("Sorry This States not Valid");
@@ -210,17 +195,10 @@ public class AddressBookImpl implements IAddressBook {
 	@Override
 	public void displayPersonByCity() {
 		
-		List<String> mylist = new ArrayList<>();
-		System.out.println("We Have list of City In DataBase");
-		for (HashMap.Entry m : contactListToMap.entrySet()) {
-			contactList = contactListToMap.get(m.getKey());
-			for (ContactDetails contactDetails : contactList) {
-				if(!mylist.contains(contactDetails.getCity())) {
-					mylist.add(contactDetails.getCity()); 
-				}
-			}
-		}
-		Collections.sort(mylist);
+		Set<String> mylist = contactListToMap.entrySet()
+		        .stream().flatMap(data->data.getValue().stream().map(ContactDetails::getCity))
+		        .collect(Collectors.toSet());
+  
 		System.out.println();
 		for (String city : mylist) {
 			System.out.println(city);
@@ -228,30 +206,14 @@ public class AddressBookImpl implements IAddressBook {
 		System.out.println("\nEnter the City From List");
 		String searchCity = SC.next();
 		if(mylist.contains(searchCity)) {
-			for (HashMap.Entry m : contactListToMap.entrySet()) {
-				contactList = contactListToMap.get(m.getKey());
-				for (ContactDetails contactDetails : contactList) {
-					if(contactDetails.getCity().equals(searchCity)) {
-						System.out.println(contactDetails.personDetails());
-					}
-				}
-			}
+			contactListToMap.entrySet()
+	        .stream().flatMap(data->data.getValue().stream())
+	        .filter(i -> i.getCity().equals(searchCity))
+	        .forEach(System.out::println);
 		}
 		else {
 			System.out.println("Sorry This city not Valid");
 		}
-		
+		     
 	}
-	
-//	@Override
-//	public void displayPersonByCity() {
-//		
-//		List<String> mylist = new ArrayList<>();
-//
-//		contactListToMap.entrySet()
-//		.forEach(contactList -> contactListToMap.get(contactList.getKey())
-//				.stream().map(data -> data.getCity())
-//				.forEach(System.out::println));
-//		
-//	}
 }

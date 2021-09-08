@@ -26,8 +26,8 @@ public class AddressBookMain {
 				System.out.println("Thank You For Participation");
 				break;
 			case 1:
-				addressBook.addContact();
-//				defaultDataEntry.defaultData();
+//				addressBook.addContact();
+				defaultDataEntry.defaultData();
 				break;
 			case 2:
 				addressBook.editContact();
