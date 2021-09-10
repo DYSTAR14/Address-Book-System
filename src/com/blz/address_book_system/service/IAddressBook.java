@@ -8,5 +8,7 @@ public interface IAddressBook {
 	public void displayContactCityStatePerson();
 	public void displayPersonByCity();
 	public void displayPersonByState();
+	public void viewPersonByCity();
+	public void viewPersonByState();
 	
 }

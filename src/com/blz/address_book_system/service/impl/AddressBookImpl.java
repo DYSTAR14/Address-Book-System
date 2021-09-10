@@ -1,6 +1,8 @@
 package com.blz.address_book_system.service.impl;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -189,7 +191,6 @@ public class AddressBookImpl implements IAddressBook {
 		else {
 			System.out.println("Sorry This States not Valid");
 		}
-		
 	}
 	
 	@Override
@@ -213,7 +214,50 @@ public class AddressBookImpl implements IAddressBook {
 		}
 		else {
 			System.out.println("Sorry This city not Valid");
+		}     
+	}
+
+	public Set<ContactDetails> storeInMap(String serchCityState, ContactDetails userContactDetails, Map<String, Set<ContactDetails>> Map) {
+		contactList = new HashSet<ContactDetails>();
+		if (Map.get(serchCityState) == null) {
+			contactList.add(userContactDetails);
+		} else {
+			contactList = Map.get(serchCityState);
+			contactList.add(userContactDetails);
 		}
-		     
+		return contactList;
+	}
+	
+	@Override
+	public void viewPersonByCity() {
+		Map<String, Set<ContactDetails>> cityMap = new HashMap<String, Set<ContactDetails>>();
+		System.out.println("We Have list of City In DataBase");
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			contactList = contactListToMap.get(m.getKey());
+			for (ContactDetails contactDetails : contactList) {
+				contactList = storeInMap(contactDetails.getCity(),contactDetails,cityMap);
+				cityMap.put(contactDetails.getCity(), contactList);
+			}
+		}
+		System.out.println("***** City By Person *****");
+		cityMap.entrySet()
+		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
+	}
+
+	@Override
+	public void viewPersonByState() {
+		Map<String, Set<ContactDetails>> stateMap = new HashMap<String, Set<ContactDetails>>();
+		System.out.println("We Have list of City In DataBase");
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			contactList = contactListToMap.get(m.getKey());
+			for (ContactDetails contactDetails : contactList) {
+				contactList = storeInMap(contactDetails.getState(),contactDetails,stateMap);
+				stateMap.put(contactDetails.getState(), contactList);
+			}
+		}
+		System.out.println("***** State By Person *****");
+		stateMap.entrySet()
+		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
+		
 	}
 }
