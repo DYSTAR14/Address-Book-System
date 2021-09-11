@@ -3,6 +3,7 @@ package com.blz.address_book_system.service.impl;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -274,5 +275,17 @@ public class AddressBookImpl implements IAddressBook {
 			contactList = stateMap.get(m.getKey());
 			System.out.println(m.getKey() + " : " + contactList.size());
 		}
+	}
+
+	@Override
+	public void sortByNameCityStateZip() {
+		System.out.println("List of Address book Name");
+		contactListToMap.forEach((k,v)-> System.out.println(k));
+		System.out.println("Enter the Address book name");
+		String addressBookName=SC.next();
+		System.out.println("Address book Sort By Name");
+		contactList = contactListToMap.get(addressBookName);
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getFirstName))
+		.forEach(System.out::println);
 	}
 }
