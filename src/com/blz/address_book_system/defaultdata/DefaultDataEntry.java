@@ -19,7 +19,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Patna");
 		contactDetails.setState("Bihar");
 		contactDetails.setEmail("ydeepak@gmail.com");
-		contactDetails.setZip("400005");
+		contactDetails.setZip("401205");
 		contactDetails.setPhone("9823563242");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList.add(contactDetails);
@@ -33,7 +33,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Patna");
 		contactDetails.setState("Bihar");
 		contactDetails.setEmail("Gaurav@gmail.com");
-		contactDetails.setZip("400005");
+		contactDetails.setZip("401305");
 		contactDetails.setPhone("9823438723");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList = AddressBookImpl.contactListToMap.get(contactDetails.getAddressBookName());
@@ -48,7 +48,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Gandhinagar");
 		contactDetails.setState("Gujarat");
 		contactDetails.setEmail("Gaurav@gmail.com");
-		contactDetails.setZip("400005");
+		contactDetails.setZip("401505");
 		contactDetails.setPhone("9823438723");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList = AddressBookImpl.contactListToMap.get(contactDetails.getAddressBookName());
@@ -78,7 +78,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Gandhinagar");
 		contactDetails.setState("Gujarat");
 		contactDetails.setEmail("jash@gmail.com");
-		contactDetails.setZip("400105");
+		contactDetails.setZip("401705");
 		contactDetails.setPhone("9823563452");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList = AddressBookImpl.contactListToMap.get(contactDetails.getAddressBookName());
@@ -93,7 +93,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Gandhinagar");
 		contactDetails.setState("Gujarat");
 		contactDetails.setEmail("jash@gmail.com");
-		contactDetails.setZip("400105");
+		contactDetails.setZip("403405");
 		contactDetails.setPhone("9823563452");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList = AddressBookImpl.contactListToMap.get(contactDetails.getAddressBookName());
@@ -109,7 +109,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Lucknow");
 		contactDetails.setState("UttarPradesh");
 		contactDetails.setEmail("Rahul@gmail.com");
-		contactDetails.setZip("400105");
+		contactDetails.setZip("406305");
 		contactDetails.setPhone("9823563452");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList.add(contactDetails);
@@ -123,7 +123,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Jaipur");
 		contactDetails.setState("Rajasthan");
 		contactDetails.setEmail("Ronak@gmail.com");
-		contactDetails.setZip("400105");
+		contactDetails.setZip("408405");
 		contactDetails.setPhone("9823563452");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList = AddressBookImpl.contactListToMap.get(contactDetails.getAddressBookName());
@@ -138,7 +138,7 @@ public class DefaultDataEntry {
 		contactDetails.setCity("Thane");
 		contactDetails.setState("Maharashtra");
 		contactDetails.setEmail("Anooj@gmail.com");
-		contactDetails.setZip("400105");
+		contactDetails.setZip("403405");
 		contactDetails.setPhone("9823563452");
 		ad.contactList = new HashSet<ContactDetails>();
 		ad.contactList = AddressBookImpl.contactListToMap.get(contactDetails.getAddressBookName());

@@ -279,13 +279,61 @@ public class AddressBookImpl implements IAddressBook {
 
 	@Override
 	public void sortByNameCityStateZip() {
+		System.out.println("Select From Option\n"
+				+ "1.Sort By Name\n"
+				+ "2.Sort By City\n"
+				+ "3.Sort By State\n"
+				+ "4.Sort BY Zip Code");
+		int option = SC.nextInt();
 		System.out.println("List of Address book Name");
 		contactListToMap.forEach((k,v)-> System.out.println(k));
 		System.out.println("Enter the Address book name");
 		String addressBookName=SC.next();
+		switch (option) {
+		case 1:
+			sortByName(addressBookName);	
+			break;
+		case 2:
+			sortByCity(addressBookName);
+			break;
+		case 3:
+			sortByState(addressBookName);
+			break;
+		case 4:
+			sortByZip(addressBookName);
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+
+	public void sortByName(String addressBookName) {
 		System.out.println("Address book Sort By Name");
 		contactList = contactListToMap.get(addressBookName);
 		contactList.stream().sorted(Comparator.comparing(ContactDetails::getFirstName))
+		.forEach(System.out::println);
+	}
+	
+	public void sortByCity(String addressBookName) {
+		System.out.println("Address book Sort By City");
+		contactList = contactListToMap.get(addressBookName);
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getCity))
+		.forEach(System.out::println);
+	}
+	
+	public void sortByState(String addressBookName) {
+		System.out.println("Address book Sort By State");
+		contactList = contactListToMap.get(addressBookName);
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getState))
+		.forEach(System.out::println);
+	}
+	
+	public void sortByZip(String addressBookName) {
+		System.out.println("Address book Sort By Zip Code");
+		contactList = contactListToMap.get(addressBookName);
+		contactList.stream().sorted(Comparator.comparing(ContactDetails::getZip))
 		.forEach(System.out::println);
 	}
 }
