@@ -10,6 +10,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.xml.crypto.Data;
+
 import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
 
@@ -81,6 +83,8 @@ public class AddressBookImpl implements IAddressBook {
 			contactDetails = userDataEntry(contactDetails);
 			DataEntry(contactDetails);
 		}
+		personByCity();
+		personByState();
 	}
 
 	public String printAddressBookName() {
@@ -174,49 +178,33 @@ public class AddressBookImpl implements IAddressBook {
 	@Override
 	public void displayPersonByState() {
 		System.out.println("We Have list of State In DataBase");
-		Set<String> mylist = contactListToMap.entrySet()
-		        .stream().flatMap(data->data.getValue().stream().map(ContactDetails::getState))
-		        .collect(Collectors.toSet());
-		
-		System.out.println();
-		for (String state : mylist) {
-			System.out.println(state);
-		}
-		System.out.println("\nEnter the States From List");
+		personByState();
+		stateMap.forEach((k,v) -> System.out.println(k));
+		System.out.println("\nEnter the state From List");
 		String searchState = SC.next();
-		if(mylist.contains(searchState)) {
-			contactListToMap.entrySet()
-	        .stream().flatMap(data->data.getValue().stream())
-	        .filter(i -> i.getState().equals(searchState))
-	        .forEach(System.out::println);
+		if(stateMap.get(searchState)!=null) {
+			contactList = stateMap.get(searchState);
+			contactList.forEach(System.out::println);
 		}
 		else {
-			System.out.println("Sorry This States not Valid");
+			System.out.println("Sorry This State not Valid");
 		}
 	}
 	
 	@Override
 	public void displayPersonByCity() {
-		
-		Set<String> mylist = contactListToMap.entrySet()
-		        .stream().flatMap(data->data.getValue().stream().map(ContactDetails::getCity))
-		        .collect(Collectors.toSet());
-  
-		System.out.println();
-		for (String city : mylist) {
-			System.out.println(city);
-		}
+		System.out.println("We Have list of City In DataBase");   
+		personByCity();
+		cityMap.forEach((k,v) -> System.out.println(k));
 		System.out.println("\nEnter the City From List");
 		String searchCity = SC.next();
-		if(mylist.contains(searchCity)) {
-			contactListToMap.entrySet()
-	        .stream().flatMap(data->data.getValue().stream())
-	        .filter(i -> i.getCity().equals(searchCity))
-	        .forEach(System.out::println);
+		if(cityMap.get(searchCity)!=null) {
+			contactList = cityMap.get(searchCity);
+			contactList.forEach(System.out::println);
 		}
 		else {
 			System.out.println("Sorry This city not Valid");
-		}     
+		}
 	}
 
 	public Set<ContactDetails> storeInMap(String serchCityState, ContactDetails userContactDetails, Map<String, Set<ContactDetails>> Map) {
@@ -230,8 +218,7 @@ public class AddressBookImpl implements IAddressBook {
 		return contactList;
 	}
 	
-	public void PersonByCity() {
-		System.out.println("We Have list of City In DataBase");
+	public void personByCity() {
 		for (HashMap.Entry m : contactListToMap.entrySet()) {
 			contactList = contactListToMap.get(m.getKey());
 			for (ContactDetails contactDetails : contactList) {
@@ -241,8 +228,7 @@ public class AddressBookImpl implements IAddressBook {
 		}
 	}
 
-	public void PersonByState() {
-		System.out.println("We Have list of State In DataBase");
+	public void personByState() {
 		for (HashMap.Entry m : contactListToMap.entrySet()) {
 			contactList = contactListToMap.get(m.getKey());
 			for (ContactDetails contactDetails : contactList) {
@@ -254,17 +240,23 @@ public class AddressBookImpl implements IAddressBook {
 
 	@Override
 	public void viewPersonByCity() {
-		PersonByCity();
+		personByCity();
 		System.out.println("***** City By Person *****");
 		cityMap.entrySet()
-		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
+		.stream().forEach(m -> {
+			System.out.print(m.getKey()+" : ");  
+			m.getValue().forEach(System.out::println);
+			System.out.println();});
 	}
 	
 	@Override
 	public void viewPersonByState() {
-		PersonByState();
+		personByState();
 		System.out.println("***** State By Person *****");
 		stateMap.entrySet()
-		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});	
+		.stream().forEach(m -> {
+			System.out.print(m.getKey()+" : ");  
+			m.getValue().forEach(System.out::println);
+			System.out.println();});	
 	}
 }
