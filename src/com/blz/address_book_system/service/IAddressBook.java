@@ -10,5 +10,6 @@ public interface IAddressBook {
 	public void displayPersonByState();
 	public void viewPersonByCity();
 	public void viewPersonByState();
+	public void viewPersonCountByCityState();
 	
 }

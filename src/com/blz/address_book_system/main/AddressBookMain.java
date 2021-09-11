@@ -19,6 +19,7 @@ public class AddressBookMain {
 					+ "4.Display Contact\n5.Display City State Person\n"
 					+ "6.Display person by City\n7.Display Person by State\n"
 					+ "8.View Person By Citys\n9.View Person By States\n"
+					+ "10.Number of Person In City and State\n"
 					+ "0.Exit\nSelect from Option");
 			int op=sc.nextInt();
 			switch(op) {
@@ -53,6 +54,9 @@ public class AddressBookMain {
 				break;
 			case 9:
 				addressBook.viewPersonByState();
+				break;
+			case 10:
+				addressBook.viewPersonCountByCityState();
 				break;
 			default:
 				System.out.println("Select from Option");

@@ -259,4 +259,20 @@ public class AddressBookImpl implements IAddressBook {
 			m.getValue().forEach(System.out::println);
 			System.out.println();});	
 	}
+	
+	@Override
+	public void viewPersonCountByCityState() {
+		personByCity();
+		personByState();
+		System.out.println("***** City By Person Count *****");
+		for (HashMap.Entry m : cityMap.entrySet()) {
+			contactList = cityMap.get(m.getKey());
+			System.out.println(m.getKey() + " : " + contactList.size());
+		}
+		System.out.println("***** State By Person Count *****");
+		for (HashMap.Entry m : stateMap.entrySet()) {
+			contactList = stateMap.get(m.getKey());
+			System.out.println(m.getKey() + " : " + contactList.size());
+		}
+	}
 }
