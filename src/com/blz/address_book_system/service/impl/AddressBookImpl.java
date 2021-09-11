@@ -18,6 +18,8 @@ public class AddressBookImpl implements IAddressBook {
 	public static Map<String, Set<ContactDetails>> contactListToMap = new HashMap<String, Set<ContactDetails>>();
 	ContactDetails contactDetails;
 	static final Scanner SC = new Scanner(System.in);
+	public static Map<String, Set<ContactDetails>> cityMap = new HashMap<String, Set<ContactDetails>>();
+	public static Map<String, Set<ContactDetails>> stateMap = new HashMap<String, Set<ContactDetails>>();
 
 	public ContactDetails userDataEntry(ContactDetails userContactDetails) {
 		System.out.println("Enter Address Book Name ");
@@ -228,9 +230,7 @@ public class AddressBookImpl implements IAddressBook {
 		return contactList;
 	}
 	
-	@Override
-	public void viewPersonByCity() {
-		Map<String, Set<ContactDetails>> cityMap = new HashMap<String, Set<ContactDetails>>();
+	public void PersonByCity() {
 		System.out.println("We Have list of City In DataBase");
 		for (HashMap.Entry m : contactListToMap.entrySet()) {
 			contactList = contactListToMap.get(m.getKey());
@@ -239,15 +239,10 @@ public class AddressBookImpl implements IAddressBook {
 				cityMap.put(contactDetails.getCity(), contactList);
 			}
 		}
-		System.out.println("***** City By Person *****");
-		cityMap.entrySet()
-		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
 	}
 
-	@Override
-	public void viewPersonByState() {
-		Map<String, Set<ContactDetails>> stateMap = new HashMap<String, Set<ContactDetails>>();
-		System.out.println("We Have list of City In DataBase");
+	public void PersonByState() {
+		System.out.println("We Have list of State In DataBase");
 		for (HashMap.Entry m : contactListToMap.entrySet()) {
 			contactList = contactListToMap.get(m.getKey());
 			for (ContactDetails contactDetails : contactList) {
@@ -255,9 +250,21 @@ public class AddressBookImpl implements IAddressBook {
 				stateMap.put(contactDetails.getState(), contactList);
 			}
 		}
+	}
+
+	@Override
+	public void viewPersonByCity() {
+		PersonByCity();
+		System.out.println("***** City By Person *****");
+		cityMap.entrySet()
+		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
+	}
+	
+	@Override
+	public void viewPersonByState() {
+		PersonByState();
 		System.out.println("***** State By Person *****");
 		stateMap.entrySet()
-		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});
-		
+		.stream().forEach(m -> {System.out.println(m.getKey() + " : " + m.getValue());System.out.println();});	
 	}
 }
