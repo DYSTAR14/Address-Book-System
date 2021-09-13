@@ -358,25 +358,6 @@ public class AddressBookImpl implements IAddressBook {
 				}
 			}
 		}
-		
-//		try{
-//			file.createNewFile();
-//			FileWriter write = new FileWriter(PATH);
-//			BufferedWriter bw = new BufferedWriter(write);
-//			for (HashMap.Entry m : contactListToMap.entrySet()) {
-//				contactList = contactListToMap.get(m.getKey());
-//				for (ContactDetails contactDetails : contactList) {
-//					 bw.write(contactDetails.toString());
-//					 bw.flush();
-//		             bw.newLine();
-//				}
-//			}
-//			System.out.println("Wrote to File");
-//			write.close();
-//			
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	@Override
