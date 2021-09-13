@@ -1,17 +1,22 @@
 package com.blz.address_book_system.service.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Comparator;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.xml.crypto.Data;
 
 import com.blz.address_book_system.dto.ContactDetails;
 import com.blz.address_book_system.service.IAddressBook;
@@ -335,5 +340,55 @@ public class AddressBookImpl implements IAddressBook {
 		contactList = contactListToMap.get(addressBookName);
 		contactList.stream().sorted(Comparator.comparing(ContactDetails::getZip))
 		.forEach(System.out::println);
+	}
+
+	@Override
+	public void writeToFile() {
+		String PATH = "static/Test.txt";
+		File file = new File(PATH);
+		for (HashMap.Entry m : contactListToMap.entrySet()) {
+			contactList = contactListToMap.get(m.getKey());
+			for (ContactDetails contactDetails : contactList) {
+				try {
+					Files.write(Paths.get(PATH), (contactDetails.toString()+System.lineSeparator())
+							.getBytes(StandardCharsets.UTF_8),
+							StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+//		try{
+//			file.createNewFile();
+//			FileWriter write = new FileWriter(PATH);
+//			BufferedWriter bw = new BufferedWriter(write);
+//			for (HashMap.Entry m : contactListToMap.entrySet()) {
+//				contactList = contactListToMap.get(m.getKey());
+//				for (ContactDetails contactDetails : contactList) {
+//					 bw.write(contactDetails.toString());
+//					 bw.flush();
+//		             bw.newLine();
+//				}
+//			}
+//			System.out.println("Wrote to File");
+//			write.close();
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+	}
+
+	@Override
+	public void readFromFile() {
+		String PATH = "static/Test.txt";
+		File file = new File(PATH);
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(Paths.get(PATH),StandardCharsets.UTF_8);
+			lines.forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

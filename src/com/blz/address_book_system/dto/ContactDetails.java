@@ -106,5 +106,4 @@ public class ContactDetails {
 		return "FirstName=" + firstName + ", LastName="+lastName + ", Address=" + address + ", City=" 
 				+ city + ", State=" + state + ", Email=" + email+ ", Zip=" + zip + ", Phone=" + phone;
 	}
-
 }

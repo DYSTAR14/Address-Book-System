@@ -1,0 +1,8 @@
+addressBookName=DYSTAR : [firstName=Gauravji, lastName=Samant, address=Empress Thane, city=Gandhinagar, state=Gujarat, email=Gaurav@gmail.com, zip=401505, phone=9823438723]
+addressBookName=DYSTAR : [firstName=Deepak, lastName=Yadav, address=Empress Thane, city=Patna, state=Bihar, email=ydeepak@gmail.com, zip=401205, phone=9823563242]
+addressBookName=DYSTAR : [firstName=Gaurav, lastName=Yadav, address=Empress Thane, city=Patna, state=Bihar, email=Gaurav@gmail.com, zip=401305, phone=9823438723]
+addressBookName=Jungle : [firstName=Jash, lastName=Vora, address=Gokul Thane, city=Gandhinagar, state=Gujarat, email=jash@gmail.com, zip=401705, phone=9823563452]
+addressBookName=Jungle : [firstName=Sarang, lastName=Potpite, address=Pune nagar, city=Pune, state=Maharashtra, email=ydeepak@gmail.com, zip=564305, phone=9823326657]
+addressBookName=Jaijavan : [firstName=Anooj, lastName=Srivastav, address=GB Thane, city=Thane, state=Maharashtra, email=Anooj@gmail.com, zip=403405, phone=9823563452]
+addressBookName=Jaijavan : [firstName=Ronak, lastName=Jain, address=Rajasthan Thane, city=Jaipur, state=Rajasthan, email=Ronak@gmail.com, zip=408405, phone=9823563452]
+addressBookName=Jaijavan : [firstName=Rahul, lastName=Sharma, address=Shimla Thane, city=Lucknow, state=UttarPradesh, email=Rahul@gmail.com, zip=406305, phone=9823563452]

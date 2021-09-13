@@ -21,6 +21,7 @@ public class AddressBookMain {
 					+ "8.View Person By Citys\n9.View Person By States\n"
 					+ "10.Number of Person In City and State\n"
 					+ "11.Display Sort By Name/City/State/Zip In AddressBook\n"
+					+ "12.Write Contact Details to File\n13.Read From File\n"
 					+ "0.Exit\nSelect from Option");
 			int op=sc.nextInt();
 			switch(op) {
@@ -61,6 +62,12 @@ public class AddressBookMain {
 				break;
 			case 11:
 				addressBook.sortByNameCityStateZip();
+				break;
+			case 12:
+				addressBook.writeToFile();
+				break;
+			case 13:
+				addressBook.readFromFile();
 				break;
 			default:
 				System.out.println("Select from Option");
